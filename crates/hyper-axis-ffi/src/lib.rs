@@ -3,6 +3,15 @@
 //! The exported Rust functions are intentionally coarse grained so a binding
 //! generator such as `flutter_rust_bridge` can own memory transfer safely.
 
+#![deny(unsafe_code)]
+
+pub mod api;
+
+// Generated bridge glue is isolated from the handwritten safe API boundary.
+// Its source is versioned and must never be patched to satisfy local lints.
+#[allow(unsafe_code, clippy::all, clippy::pedantic)]
+mod frb_generated;
+
 use std::str::FromStr;
 
 pub use hyper_axis_core::actions::{AgentAbstraction, CSignerVariant, UserAbstraction};
