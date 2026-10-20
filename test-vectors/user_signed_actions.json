@@ -1,0 +1,57 @@
+{
+  "description": "User-signed transfer and withdrawal vectors generated independently with eth-account 0.13.7",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "nonce": "1234567890000",
+  "usdSend": {
+    "primaryType": "HyperliquidTransaction:UsdSend",
+    "action": {
+      "type": "usdSend",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "destination": "0x000000000000000000000000000000000000dead",
+      "amount": "12.5",
+      "time": 1234567890000
+    },
+    "signingDigestHex": "e887d1d7857cd5fd0a4ada4afde0bbccab52952c9f00c76fe780f1e274c950b9",
+    "signature": {
+      "r": "0x5dd4fd83e34e079e11d7f7438c9d2921401de2d1d7d85dac35373589ab1a3893",
+      "s": "0x05d59640a3d5a8683c3d1b54565f7ca19e5a0ada4c6831c6d833d9b652a78f62",
+      "v": 27
+    }
+  },
+  "spotSend": {
+    "primaryType": "HyperliquidTransaction:SpotSend",
+    "action": {
+      "type": "spotSend",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "destination": "0x000000000000000000000000000000000000dead",
+      "token": "PURR:0xc4bf3f870c0e9465323c0b6ed28096c2",
+      "amount": "0.01",
+      "time": 1234567890000
+    },
+    "signingDigestHex": "0f21ebb32da085e4342aa4a9287af851aaa2dd22fd947a275c97bc32e661fc0b",
+    "signature": {
+      "r": "0xecd8061d61071ba200c66a48754191c98a24e560d77fcf77cab724cc34aed4c2",
+      "s": "0x7858255d1cb74d0267fbfea88aaea79c81f8efd60c1012f5243af56959bb96df",
+      "v": 27
+    }
+  },
+  "withdraw": {
+    "primaryType": "HyperliquidTransaction:Withdraw",
+    "action": {
+      "type": "withdraw3",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "destination": "0x000000000000000000000000000000000000dead",
+      "amount": "3.25",
+      "time": 1234567890000
+    },
+    "signingDigestHex": "f0881e5bc8f5b56640c83e30e4a75f21c5a2ef09f932852f7db283c3491cbd48",
+    "signature": {
+      "r": "0xa423a9d07c1324509b509f1c66c6ed2cbae0e5410240503f8b0e49f6c257d6f3",
+      "s": "0x2fdd58472f99ce4c084e08589a7e5ab144a3c19ef6407305bebe268dada7d8d8",
+      "v": 28
+    }
+  }
+}

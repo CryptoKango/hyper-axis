@@ -1,0 +1,56 @@
+{
+  "description": "User-signed authorization vectors generated independently with eth-account 0.13.7",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "nonce": "1234567890000",
+  "approveAgent": {
+    "primaryType": "HyperliquidTransaction:ApproveAgent",
+    "action": {
+      "type": "approveAgent",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "agentAddress": "0x000000000000000000000000000000000000beef",
+      "agentName": "mobile-primary",
+      "nonce": 1234567890000
+    },
+    "signingDigestHex": "faf9083f68b3c0c14c5aad4dc17b71ae18172d67986fd3ce3c0339ccd0197c69",
+    "signature": {
+      "r": "0xb752cc118a55bed3c88f560c35ab2d009a202c9661c785009c61eb16feb33676",
+      "s": "0x3c65c96833de4759bc9ff9ed216ed91cd6b346b2fa22fa7adb857f1a775b31e1",
+      "v": 27
+    }
+  },
+  "approveUnnamedAgent": {
+    "primaryType": "HyperliquidTransaction:ApproveAgent",
+    "signedAgentName": "",
+    "action": {
+      "type": "approveAgent",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "agentAddress": "0x000000000000000000000000000000000000beef",
+      "nonce": 1234567890000
+    },
+    "signingDigestHex": "468e00ead5c01b59bbea8fdbdbb3d2b4d269261458883c37ea9542c976eede3b",
+    "signature": {
+      "r": "0x2f70e455b264f9b3317a9d1622d5659a1e3c4e73e22ab04506b028a310364c99",
+      "s": "0x6ef7898ca4c20c396a5f2766ea6c4540675cc1a2defefc963157194cc5110210",
+      "v": 27
+    }
+  },
+  "approveBuilderFee": {
+    "primaryType": "HyperliquidTransaction:ApproveBuilderFee",
+    "action": {
+      "type": "approveBuilderFee",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "maxFeeRate": "0.001%",
+      "builder": "0x000000000000000000000000000000000000b0b0",
+      "nonce": 1234567890000
+    },
+    "signingDigestHex": "4852876ed63bedbd852da154bc11767067dd453cbe1f26085b4b089a63cb8989",
+    "signature": {
+      "r": "0x0bcbe9b88448b5da8fe32872529d71813008351f15812a61bc0fc1e450b1c0b9",
+      "s": "0x4c7eff8f4e19a67950dc067afdee4d248a23eb50e8a1da7f1c069140fb3516f1",
+      "v": 27
+    }
+  }
+}

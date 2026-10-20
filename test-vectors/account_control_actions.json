@@ -1,0 +1,65 @@
+{
+  "description": "Independent account-control L1 vectors generated with msgpack and eth-account 0.13.7 using fixed test key 0x01",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "nonce": "1234567890000",
+  "setReferrer": {
+    "action": {"type": "setReferrer", "code": "HYPERAXIS"},
+    "vaultAddress": null,
+    "messagePackHex": "82a474797065ab7365745265666572726572a4636f6465a9485950455241584953",
+    "actionHashHex": "10391e5a47bb574bac871f00637401c47a074fc87ebd87675d116b99d19a12dd",
+    "signingDigestHex": "c612d5fe234fbc9832ee4742adc6a54dde7c0f617c05f0540894cdd424650e82",
+    "signature": {
+      "r": "0x22a24163f19c0eba1adecaf08c37f639f09e02bdacd8df0dba94542de23cfbac",
+      "s": "0x78915325dc99aec779f62aa1c48fbd450cd3b7dc19678fc9347da3d6d5bb9f54",
+      "v": 28
+    }
+  },
+  "evmUserModify": {
+    "action": {"type": "evmUserModify", "usingBigBlocks": true},
+    "vaultAddress": null,
+    "messagePackHex": "82a474797065ad65766d557365724d6f64696679ae7573696e67426967426c6f636b73c3",
+    "actionHashHex": "4c4a8db6b81fb529383d19f9416a88ca07a272a8558b0a9beda635275d69d886",
+    "signingDigestHex": "1c8c395886c74f6fb096630d1ed3730f5c2750114b4e67d796c91f38f7089e9d",
+    "signature": {
+      "r": "0x2f4b4de1b82ecd44d470c6cf163291038b416831d0f970519018a4f14a00d9dc",
+      "s": "0x268281b585478b0eb8710108342b93c7ce867756c0e21012712506654d68d9e5",
+      "v": 28
+    }
+  },
+  "agentEnableDexAbstraction": {
+    "action": {"type": "agentEnableDexAbstraction"},
+    "vaultAddress": "0x000000000000000000000000000000000000cafe",
+    "messagePackHex": "81a474797065b96167656e74456e61626c654465784162737472616374696f6e",
+    "actionHashHex": "de0e8823e071479c84823ee6a07fef1bb6230cae6cfa140df9da8a084af94f84",
+    "signingDigestHex": "af1d97202079ab623e292852782f6dc7ac9d3a40e38a5244dcb53f5ea7a77acd",
+    "signature": {
+      "r": "0x119cb67b86e2c5cc4ecc6c4954d229c331e757942791ecb9c90a44a3070d5fc7",
+      "s": "0x01d51573a51e627164c6caf0b78b1bcf4fc32ff9379385ddd09ac6a506913dc5",
+      "v": 28
+    }
+  },
+  "agentSetAbstraction": {
+    "action": {"type": "agentSetAbstraction", "abstraction": "p"},
+    "vaultAddress": "0x000000000000000000000000000000000000cafe",
+    "messagePackHex": "82a474797065b36167656e745365744162737472616374696f6eab6162737472616374696f6ea170",
+    "actionHashHex": "716aaec844ddc7c675e9ca406046fb3f4ae85adb6c76be9f3be120861ccbaafd",
+    "signingDigestHex": "83291f315a9fec68ff6a3cab7933be8421f7b002f81b28795b844ef19424e1c5",
+    "signature": {
+      "r": "0x05cb3164e0cd4ee7af2bccff985e641b39ecd4a9744eba065e5fd98d36eb596d",
+      "s": "0x2b379bb512613eb9d47898a62aca0a8c5d6f407a517dce3353f7b283496f9da3",
+      "v": 28
+    }
+  },
+  "noop": {
+    "action": {"type": "noop"},
+    "vaultAddress": null,
+    "messagePackHex": "81a474797065a46e6f6f70",
+    "actionHashHex": "b8ae348fa30d0f0487c452132810aa120a03700db6885282a4384800ac776d83",
+    "signingDigestHex": "d0b9c9e7c9c4fecce77bba46d4e40fffdb223cb3ce20f8dd3298dcf4a200191c",
+    "signature": {
+      "r": "0x61349a6d06112f9128ea60cba7fed7d8d0fbd312b3a2c6d58b52a3df8339ba2c",
+      "s": "0x6ec554786ad81bc16919565aee555aa4a193b09e8a79926546403be44f2489c9",
+      "v": 28
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "source": "independent eth-account EIP-712 generation using fixed test key 0x01",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "cDeposit": {
+    "action": {
+      "type": "cDeposit",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "nonce": 1234567890000,
+      "wei": 100000000
+    },
+    "primaryType": "HyperliquidTransaction:CDeposit",
+    "signingDigestHex": "4c29f3ee7670df095864f567b3af7c0f763b31365ba06406a3187321f98c2b57",
+    "signature": {
+      "r": "0xeaad5f56ce37bbb2c3e4c04318737c1d18e832865a9219ad9f364a323e25fc7a",
+      "s": "0x04eb0e61adc76794af52dbf16615b96d4dcfbd211e272b44f9a6eb047a5344ce",
+      "v": 28
+    }
+  },
+  "cWithdraw": {
+    "action": {
+      "type": "cWithdraw",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "nonce": 1234567890000,
+      "wei": 50000000
+    },
+    "primaryType": "HyperliquidTransaction:CWithdraw",
+    "signingDigestHex": "f04127bd02f74f3a8ee6c5d7c2f536f53ceb6a50a0a93e5cdcc2cf2f63bb1385",
+    "signature": {
+      "r": "0x8535d67895f2f7d1e1a7ab1d900717b05056f67c0550c186f6ae93860c45c40a",
+      "s": "0x1b7217aa1617e3cdfd75baaa77b09239785fa43dd7f83c2f75a57568491e7ff6",
+      "v": 28
+    }
+  },
+  "tokenDelegate": {
+    "action": {
+      "type": "tokenDelegate",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "nonce": 1234567890000,
+      "validator": "0x000000000000000000000000000000000000beef",
+      "wei": 25000000,
+      "isUndelegate": false
+    },
+    "primaryType": "HyperliquidTransaction:TokenDelegate",
+    "signingDigestHex": "0562ccd7acc3c69495c25eba2e3c83f82487a20e50a85f5428d2384f91d8d37a",
+    "signature": {
+      "r": "0x6c84b82697ee101107b9bc57371022abafac92674eba6abc0dffc173019c7382",
+      "s": "0x1114c350dbab667d647d0d279203a57c7e812737ffcce37204c145b322303a0c",
+      "v": 28
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "description": "Leverage and isolated-margin actions encoded independently with Python msgpack.packb and Crypto.Hash.keccak",
+  "updateLeverage": {
+    "action": {
+      "type": "updateLeverage",
+      "asset": 4,
+      "isCross": false,
+      "leverage": 12
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "84a474797065ae7570646174654c65766572616765a5617373657404a7697343726f7373c2a86c657665726167650c",
+    "actionHashHex": "cd0f79c94dacd305420c29f4bc8b140ceadbc27f7fa6336d767a7e31fea410ad"
+  },
+  "updateIsolatedMargin": {
+    "action": {
+      "type": "updateIsolatedMargin",
+      "asset": 4,
+      "isBuy": true,
+      "ntli": -1250000
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "84a474797065b475706461746549736f6c617465644d617267696ea5617373657404a56973427579c3a46e746c69d2ffeced30",
+    "actionHashHex": "e177d2de324f6325105454b5301c9a03e0424cb30b88cd6ecbba2b7afb409b8b"
+  },
+  "topUpIsolatedOnlyMargin": {
+    "action": {
+      "type": "topUpIsolatedOnlyMargin",
+      "asset": 4,
+      "leverage": "3.5"
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "83a474797065b7746f70557049736f6c617465644f6e6c794d617267696ea5617373657404a86c65766572616765a3332e35",
+    "actionHashHex": "d61f9c61991e23f3ae6b0dfd579948bc9f0aba042b0f61c7e517da36d8c79ee8"
+  }
+}

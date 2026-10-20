@@ -1,0 +1,55 @@
+{
+  "description": "Independent account-security EIP-712 vectors generated with eth-account 0.13.7 and fixed test key 0x01",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "nonce": "1234567890000",
+  "userDexAbstraction": {
+    "action": {
+      "type": "userDexAbstraction",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "user": "0x000000000000000000000000000000000000cafe",
+      "enabled": true,
+      "nonce": 1234567890000
+    },
+    "primaryType": "HyperliquidTransaction:UserDexAbstraction",
+    "signingDigestHex": "5aef5cad2e821e3fbe527b9c6d0025a37d65ff36d801907352a81e73383aaf01",
+    "signature": {
+      "r": "0x1754a5f704b1234de86f9aeb0b48eb17e9a0e3a5ff08cb61ec8ad2a31179dcdd",
+      "s": "0x55b475a39a9c9bcc657a417358868d179efd3fbf67bf866e95eacbee86f599f8",
+      "v": 27
+    }
+  },
+  "userSetAbstraction": {
+    "action": {
+      "type": "userSetAbstraction",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "user": "0x000000000000000000000000000000000000cafe",
+      "abstraction": "portfolioMargin",
+      "nonce": 1234567890000
+    },
+    "primaryType": "HyperliquidTransaction:UserSetAbstraction",
+    "signingDigestHex": "30f4e8d850a01e40c99b6527da1d4ef4746f1f75aa1e064fe32c7620b8b829bb",
+    "signature": {
+      "r": "0x248f197297175f3fa47179dad747f90ec72a66e947c1057ca4598656b40e0803",
+      "s": "0x7d108f345709cd5f3f5b111e5e6dec9034c14a568c3ba1f3a84636a38fec14e8",
+      "v": 28
+    }
+  },
+  "convertToMultiSigUser": {
+    "action": {
+      "type": "convertToMultiSigUser",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "signers": "{\"authorizedUsers\": [\"0x000000000000000000000000000000000000beef\", \"0x000000000000000000000000000000000000cafe\"], \"threshold\": 2}",
+      "nonce": 1234567890000
+    },
+    "primaryType": "HyperliquidTransaction:ConvertToMultiSigUser",
+    "signingDigestHex": "e2b29a94a191a232e0013446c50558538ea47fc0de46bab76b5a177e3bdd949a",
+    "signature": {
+      "r": "0xd701120dc042abfbfbcca73c1a1fbd74b2844c6b2623c9dfa0743bd82eb5283e",
+      "s": "0x04fb95b90270446052c228fa06a1c6819726255e2db41d9272ef0800d6950113",
+      "v": 27
+    }
+  }
+}

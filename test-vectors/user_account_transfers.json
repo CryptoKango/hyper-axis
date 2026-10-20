@@ -1,0 +1,43 @@
+{
+  "description": "User-signed account and DEX transfer vectors generated independently with eth-account 0.13.7",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "nonce": "1234567890000",
+  "usdClassTransfer": {
+    "primaryType": "HyperliquidTransaction:UsdClassTransfer",
+    "action": {
+      "type": "usdClassTransfer",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "amount": "12.5 subaccount:0x000000000000000000000000000000000000cafe",
+      "toPerp": true,
+      "nonce": 1234567890000
+    },
+    "signingDigestHex": "ee2cb87725d2b45f866c8b81a294a87b63c59f74a67998b4ba322fa3e80a0707",
+    "signature": {
+      "r": "0xe0f9379ca542d82c36eec50e0c36412495deaa430e3ad8b55137c4d9bfc65ffa",
+      "s": "0x60c223d2aabae160794dbf7481554be5361b753bc6595b1ce27f1ee90cae5f83",
+      "v": 28
+    }
+  },
+  "sendAsset": {
+    "primaryType": "HyperliquidTransaction:SendAsset",
+    "action": {
+      "type": "sendAsset",
+      "hyperliquidChain": "Mainnet",
+      "signatureChainId": "0x66eee",
+      "destination": "0x000000000000000000000000000000000000dead",
+      "sourceDex": "spot",
+      "destinationDex": "spot",
+      "token": "PURR:0xc4bf3f870c0e9465323c0b6ed28096c2",
+      "amount": "0.01",
+      "fromSubAccount": "0x000000000000000000000000000000000000cafe",
+      "nonce": 1234567890000
+    },
+    "signingDigestHex": "ae1c690aeb97bb3af5c21b9c9a1957d99e845b5fc0fe7a1f097e413073e76c64",
+    "signature": {
+      "r": "0xf3d3ce3d21f6e34f5a1c98491bbd74095ec030c9816adfed403675b020e62b29",
+      "s": "0x62b23d6bf3ee5daca53be4856926c7aee1d594c84afc3b45defdf665a522e7e7",
+      "v": 27
+    }
+  }
+}

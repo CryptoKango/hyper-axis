@@ -1,0 +1,62 @@
+{
+  "description": "Cancel and modify actions encoded independently with Python msgpack.packb and Crypto.Hash.keccak",
+  "cancel": {
+    "action": {
+      "type": "cancel",
+      "cancels": [
+        {
+          "a": 3,
+          "o": 42
+        }
+      ]
+    },
+    "nonce": "1234567890000",
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065a663616e63656ca763616e63656c739182a16103a16f2a",
+    "actionHashHex": "109af46f04bd7737541d877a9a766b3f32268f0718f384b31f0438dab5a5ddca"
+  },
+  "cancelByCloid": {
+    "action": {
+      "type": "cancelByCloid",
+      "cancels": [
+        {
+          "asset": 3,
+          "cloid": "0x1234567890abcdef1234567890abcdef"
+        }
+      ]
+    },
+    "nonce": "1234567890000",
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065ad63616e63656c4279436c6f6964a763616e63656c739182a5617373657403a5636c6f6964d92230783132333435363738393061626364656631323334353637383930616263646566",
+    "actionHashHex": "e5ccbf3dfb511630f9bb093938e8a62d2ac2a0f508507c909470e2ab6c0a9f6e"
+  },
+  "batchModify": {
+    "action": {
+      "type": "batchModify",
+      "modifies": [
+        {
+          "oid": 42,
+          "order": {
+            "a": 3,
+            "b": true,
+            "p": "100",
+            "s": "0.5",
+            "r": false,
+            "t": {
+              "limit": {
+                "tif": "Gtc"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "nonce": "1234567890000",
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065ab62617463684d6f64696679a86d6f6469666965739182a36f69642aa56f7264657286a16103a162c3a170a3313030a173a3302e35a172c2a17481a56c696d697481a3746966a3477463",
+    "actionHashHex": "7cd4d8b4d32f29c44dc7902a788e38640ec34f452adfc0d2d442b1c69c4efe69"
+  }
+}

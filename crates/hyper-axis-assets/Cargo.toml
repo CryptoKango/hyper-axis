@@ -1,0 +1,14 @@
+[package]
+name = "hyper-axis-assets"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+hyper-axis-decimal.workspace = true
+hyper-axis-types.workspace = true
+serde.workspace = true
+
+[lints]
+workspace = true

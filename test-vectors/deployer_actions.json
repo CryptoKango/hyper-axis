@@ -1,0 +1,314 @@
+{
+  "description": "Independent Spot and perpetual deployer L1 vectors generated with msgpack and eth-account 0.13.7",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "nonce": "1234567890000",
+  "spotRegisterToken": {
+    "action": {
+      "type": "spotDeploy",
+      "registerToken2": {
+        "spec": {
+          "name": "AXIS",
+          "szDecimals": 2,
+          "weiDecimals": 8
+        },
+        "maxGas": 500000,
+        "fullName": "Hyper Axis"
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79ae7265676973746572546f6b656e3283a47370656383a46e616d65a441584953aa737a446563696d616c7302ab776569446563696d616c7308a66d6178476173ce0007a120a866756c6c4e616d65aa48797065722041786973",
+    "actionHashHex": "8c701f1c74b66885e54484a439505c338f4493b40797281ebe9e4accaecd6f79",
+    "signingDigestHex": "f44c50c7ad4df89e18c08ebde73276a5c2e7d8752cc7822f644512c8b6f1c2db",
+    "signature": {
+      "r": "0xffdcfdcaf2b2f753e02399f084e5f0f55b1aaf8cb176a31052f5540c5c2ec3fd",
+      "s": "0x2fb4738b18efc7713a460d79f00f87acc86acb424f23429f922764a67c8e2416",
+      "v": 28
+    }
+  },
+  "spotUserGenesis": {
+    "action": {
+      "type": "spotDeploy",
+      "userGenesis": {
+        "token": 101,
+        "userAndWei": [
+          [
+            "0x000000000000000000000000000000000000beef",
+            "25000000"
+          ],
+          [
+            "0x000000000000000000000000000000000000cafe",
+            "75000000"
+          ]
+        ],
+        "existingTokenAndWei": [
+          [
+            0,
+            "1000000"
+          ],
+          [
+            7,
+            "2000000"
+          ]
+        ]
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79ab7573657247656e6573697383a5746f6b656e65aa75736572416e645765699292d92a307830303030303030303030303030303030303030303030303030303030303030303030303062656566a8323530303030303092d92a307830303030303030303030303030303030303030303030303030303030303030303030303063616665a83735303030303030b36578697374696e67546f6b656e416e64576569929200a7313030303030309207a732303030303030",
+    "actionHashHex": "8ec867f31ddff27183ada50bcaf5079963766cc14d68e6536766a8b18311aa9f",
+    "signingDigestHex": "2aa0308f44bb259d1b29a5ed7d13bb54408fd14e8975d213064e04004dbe238f",
+    "signature": {
+      "r": "0x4426860f97eeed60ea6a06af00cb6f9f6e3d66e90899f43f5ad65748563e2332",
+      "s": "0x154f173a390dea2832d96a7a40e0c7b1b5c773b914cdb156eec05320d4915170",
+      "v": 28
+    }
+  },
+  "spotEnableFreezePrivilege": {
+    "action": {
+      "type": "spotDeploy",
+      "enableFreezePrivilege": {
+        "token": 101
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79b5656e61626c65467265657a6550726976696c65676581a5746f6b656e65",
+    "actionHashHex": "b6f73f05230dbb0459e9560ab52196a89ca062e03a71b3f3a7a44fd2eab9cff7",
+    "signingDigestHex": "c64320a204965b386eb9fde09d5ad6f5519edf379c3b0d47090857620e5cef71",
+    "signature": {
+      "r": "0xdf735b039abaebac462a153c531147aa59e38eaeffbece6981803046e5971bc9",
+      "s": "0x75380d571398631177ed6f7564c73773e9ae928a1c0930aa850c84c750023480",
+      "v": 27
+    }
+  },
+  "spotFreezeUser": {
+    "action": {
+      "type": "spotDeploy",
+      "freezeUser": {
+        "token": 101,
+        "user": "0x000000000000000000000000000000000000beef",
+        "freeze": true
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79aa667265657a655573657283a5746f6b656e65a475736572d92a307830303030303030303030303030303030303030303030303030303030303030303030303062656566a6667265657a65c3",
+    "actionHashHex": "defe0c24235dd69157866e1daaa04e2a95f85e91f48fe6731a087a4520f557c2",
+    "signingDigestHex": "30985499764030435bce14b516321624e2ac5fc47f1b9b25f1276b36f33c9da8",
+    "signature": {
+      "r": "0x45001e5643edbaf49561b55ecb9ce0a85ce584d4c03f5489588c05e82eb6b149",
+      "s": "0x66bb7ec59ef7b7cad4d7f3c8321f3fe3c8361357f4c73efb22e284406a37a284",
+      "v": 28
+    }
+  },
+  "spotRevokeFreezePrivilege": {
+    "action": {
+      "type": "spotDeploy",
+      "revokeFreezePrivilege": {
+        "token": 101
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79b57265766f6b65467265657a6550726976696c65676581a5746f6b656e65",
+    "actionHashHex": "c1798521e1d84161db539f5d15dfabb908c7122305b04e95e0178c3620693837",
+    "signingDigestHex": "d28fd8618b5824993684fbeaa6f80644890c9cc908b87f596e867d5cc861e636",
+    "signature": {
+      "r": "0x05d89f739cf8dc3f8f73325be2bf5c03a3c6c151f4cc3d4d5372925a1fc4d843",
+      "s": "0x55e183d8184b4926f9a80bb6ca9a7489894a526726eee5b1dfe15cd26e94041e",
+      "v": 27
+    }
+  },
+  "spotEnableQuoteToken": {
+    "action": {
+      "type": "spotDeploy",
+      "enableQuoteToken": {
+        "token": 101
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79b0656e61626c6551756f7465546f6b656e81a5746f6b656e65",
+    "actionHashHex": "6604736596c9aa797a4d6f356886b1281c0c9001b6c8b3e697b7bf5a10d786d5",
+    "signingDigestHex": "f9bd05f54593d784413e3ef643f1462cb7dbef1286596e3fbd376f71a55e669d",
+    "signature": {
+      "r": "0xeb76787d54470b013604c1066d3924782ee117cdd0577734cde14de6453fa4d8",
+      "s": "0x347506cfff2de93c7464cc5c97c8b03886254a0a9435e31353216c767e5cdb99",
+      "v": 28
+    }
+  },
+  "spotGenesis": {
+    "action": {
+      "type": "spotDeploy",
+      "genesis": {
+        "token": 101,
+        "maxSupply": "1000000000000000",
+        "noHyperliquidity": true
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79a767656e6573697383a5746f6b656e65a96d6178537570706c79b031303030303030303030303030303030b06e6f48797065726c6971756964697479c3",
+    "actionHashHex": "6c434470ccbbd80c54dfe29469ef320e3a15209789f4931b4dabcb5771e02ce8",
+    "signingDigestHex": "818e371875c25f86a8eb9151bd09b1d1c0e163fbcce5b09f3f5244ee2cac30b0",
+    "signature": {
+      "r": "0xca07c4cefbf6f2ae3f0ad0d506c3d1e1121323e7a29a45f9719e2706b3a8b1d8",
+      "s": "0x2212e6e092d5c4b2bdc5c08c4518d56b4ba81a3d871745fe082581401f4fa490",
+      "v": 28
+    }
+  },
+  "spotRegisterSpot": {
+    "action": {
+      "type": "spotDeploy",
+      "registerSpot": {
+        "tokens": [
+          101,
+          0
+        ]
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79ac726567697374657253706f7481a6746f6b656e73926500",
+    "actionHashHex": "2730f3d883726cfabf056a17a0e91dbd05e08d33911eae5cbe301b9b67f2ca10",
+    "signingDigestHex": "4854f86108fb842e9536c01e9a6603aeae6179b612d9731995e601a5654ede69",
+    "signature": {
+      "r": "0xb5ee040ec8a851e6f7b9446b7de98b7cc6be8c59a80c66eb53380cc8f8da1e5c",
+      "s": "0x79761fd29c2b6e06ae25a0c9faa3329cf51e498e9fdeff9ddf63a11eee362937",
+      "v": 28
+    }
+  },
+  "spotRegisterHyperliquidity": {
+    "action": {
+      "type": "spotDeploy",
+      "registerHyperliquidity": {
+        "spot": 12,
+        "startPx": "1.25",
+        "orderSz": "10",
+        "nOrders": 20,
+        "nSeededLevels": 5
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79b6726567697374657248797065726c697175696469747985a473706f740ca773746172745078a4312e3235a76f72646572537aa23130a76e4f726465727314ad6e5365656465644c6576656c7305",
+    "actionHashHex": "34db7d398c286404ae5bc01b5ce073186e5158f05cbd84aac87aa93342f92659",
+    "signingDigestHex": "755d4caca6e4dd1ee9ad3b529171464b63909f121d62bd5746436693ed3f0c02",
+    "signature": {
+      "r": "0xea42b92af78ba3fb8193ee98b11a2aef839b9977ad2efd7cd4380a89df6e503e",
+      "s": "0x43d06dbc166802c3ffa5eb445c182f38b2913497ef1d02a061c6fc8b8fe11436",
+      "v": 28
+    }
+  },
+  "spotSetDeployerTradingFeeShare": {
+    "action": {
+      "type": "spotDeploy",
+      "setDeployerTradingFeeShare": {
+        "token": 101,
+        "share": "0.1"
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa73706f744465706c6f79ba7365744465706c6f79657254726164696e67466565536861726582a5746f6b656e65a57368617265a3302e31",
+    "actionHashHex": "1e34efa17e4c4355fc4aaf4ab777dfa84da709ddd30e93012a10ba993031470c",
+    "signingDigestHex": "7d653bcd43fbd7cd17a5f90e05e0ff6d0226616bf692d65495928592822844c8",
+    "signature": {
+      "r": "0x159e2ae86a6e00d80967f8e8a29d5481dd982b0dc6e781bd4680b00256e852e7",
+      "s": "0x44ec024b65a0fc79283353eda6f63e871b55d3f24e1105d39fe153cb13e4ea7d",
+      "v": 27
+    }
+  },
+  "perpRegisterAsset": {
+    "action": {
+      "type": "perpDeploy",
+      "registerAsset": {
+        "maxGas": 700000,
+        "assetRequest": {
+          "coin": "AXIS",
+          "szDecimals": 3,
+          "oraclePx": "12.5",
+          "marginTableId": 7,
+          "onlyIsolated": true
+        },
+        "dex": "axis",
+        "schema": {
+          "fullName": "Hyper Axis Perps",
+          "collateralToken": 0,
+          "oracleUpdater": "0x000000000000000000000000000000000000beef"
+        }
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa706572704465706c6f79ad7265676973746572417373657484a66d6178476173ce000aae60ac61737365745265717565737485a4636f696ea441584953aa737a446563696d616c7303a86f7261636c655078a431322e35ad6d617267696e5461626c65496407ac6f6e6c7949736f6c61746564c3a3646578a461786973a6736368656d6183a866756c6c4e616d65b048797065722041786973205065727073af636f6c6c61746572616c546f6b656e00ad6f7261636c6555706461746572d92a307830303030303030303030303030303030303030303030303030303030303030303030303062656566",
+    "actionHashHex": "83ec8e25b65341968d58054e4ca815b706053bd636c4a07c69f72fd1189cfb3e",
+    "signingDigestHex": "e50f5a1cb52be12e65da017ec1c0b661b59b1a97113b1cbd294be50ec91e7e02",
+    "signature": {
+      "r": "0x9221a7170ec003e035020a2190220197db00e1aee9aa4d236b620cdd6477006c",
+      "s": "0x09c14c01a81d53d36aebb7a186607e7224c3e3f64322418addd58cd16b484900",
+      "v": 28
+    }
+  },
+  "perpSetOracle": {
+    "action": {
+      "type": "perpDeploy",
+      "setOracle": {
+        "dex": "axis",
+        "oraclePxs": [
+          [
+            "AXIS",
+            "12.5"
+          ],
+          [
+            "BETA",
+            "3.25"
+          ]
+        ],
+        "markPxs": [
+          [
+            [
+              "AXIS",
+              "12.4"
+            ],
+            [
+              "BETA",
+              "3.2"
+            ]
+          ],
+          [
+            [
+              "AXIS",
+              "12.6"
+            ],
+            [
+              "BETA",
+              "3.3"
+            ]
+          ]
+        ],
+        "externalPerpPxs": [
+          [
+            "AXIS",
+            "12.45"
+          ],
+          [
+            "BETA",
+            "3.22"
+          ]
+        ]
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065aa706572704465706c6f79a97365744f7261636c6584a3646578a461786973a96f7261636c655078739292a441584953a431322e3592a442455441a4332e3235a76d61726b507873929292a441584953a431322e3492a442455441a3332e329292a441584953a431322e3692a442455441a3332e33af65787465726e616c506572705078739292a441584953a531322e343592a442455441a4332e3232",
+    "actionHashHex": "32a565224d73c980da107926025afd3097a8915b3054dafb4ad0d4b1c77143cf",
+    "signingDigestHex": "59862831e44994490743b86fac92181c39da9fdd6faf1a088cdfb3cc1e574465",
+    "signature": {
+      "r": "0xf2d23314403fdc999b79fdea7e5697eef5e5e2b9c7da92643ee8224427d09412",
+      "s": "0x00b9482f5f7e5914d8182c794696cc97a87396d9cf928ff0f98746a23053867c",
+      "v": 28
+    }
+  }
+}

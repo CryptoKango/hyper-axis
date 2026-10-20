@@ -1,0 +1,126 @@
+{
+  "description": "Independent validator and gossip L1 vectors generated with msgpack and eth-account 0.13.7",
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "nonce": "1234567890000",
+  "cSignerUnjailSelf": {
+    "action": {
+      "type": "CSignerAction",
+      "unjailSelf": null
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065ad435369676e6572416374696f6eaa756e6a61696c53656c66c0",
+    "actionHashHex": "7015ee95b6e1a9af6ecf44777c001c81b187c5a95d8bbda4c24375c18304f4cb",
+    "signingDigestHex": "87cb03641aada1b39fba7f71f45c1a4a15476641ab243db9dff53a9061097ad3",
+    "signature": {
+      "r": "0x0d6e4a4a5bdd5353424400c0f412b340e8c80120c457b508ccec26cd6fc78f9d",
+      "s": "0x493e654a8b541660a3c4a9ce7415ff6191f0f5b9ba3dfdd922749e9e426f7419",
+      "v": 27
+    }
+  },
+  "cSignerJailSelf": {
+    "action": {
+      "type": "CSignerAction",
+      "jailSelf": null
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065ad435369676e6572416374696f6ea86a61696c53656c66c0",
+    "actionHashHex": "6b5184ebf8b0f7d408ce476d765a4adb04a1da102264132802820b727ce79d9b",
+    "signingDigestHex": "2c34098424b611ae0b56078ca51847755f62a55ad9b5347bb139877982c82ca4",
+    "signature": {
+      "r": "0xe22dee449d8f743622f54e3cb64c2ae3ed4b11fd9ef95b30b5bac64ae4d801d1",
+      "s": "0x5d949eaeacb38c3439822bc1305aa8ee43145247dfaab1b98702df99b6e25c84",
+      "v": 28
+    }
+  },
+  "cValidatorRegister": {
+    "action": {
+      "type": "CValidatorAction",
+      "register": {
+        "profile": {
+          "node_ip": {
+            "Ip": "192.0.2.10"
+          },
+          "name": "hyper-axis-validator",
+          "description": "production validator",
+          "delegations_disabled": false,
+          "commission_bps": 500,
+          "signer": "0x000000000000000000000000000000000000beef"
+        },
+        "unjailed": true,
+        "initial_wei": 25000000
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065b04356616c696461746f72416374696f6ea8726567697374657283a770726f66696c6586a76e6f64655f697081a24970aa3139322e302e322e3130a46e616d65b468797065722d617869732d76616c696461746f72ab6465736372697074696f6eb470726f64756374696f6e2076616c696461746f72b464656c65676174696f6e735f64697361626c6564c2ae636f6d6d697373696f6e5f627073cd01f4a67369676e6572d92a307830303030303030303030303030303030303030303030303030303030303030303030303062656566a8756e6a61696c6564c3ab696e697469616c5f776569ce017d7840",
+    "actionHashHex": "1d42f80ca095c32507755f232b8c735e1c03352ae60c1f49282ce1c71c73be05",
+    "signingDigestHex": "f2075724db6d8e208baac1c8da2faf158cb6d38b15d96921270e18d8f29301f6",
+    "signature": {
+      "r": "0xbf5ddc0fa444acb7505e9b1164828aa72dd9b63e3014260a33cd2727018e69c1",
+      "s": "0x299e09018656bd77da6e7a6473edc6ea1ba2dc1b43dd97e4c82e616cb24ce2fa",
+      "v": 28
+    }
+  },
+  "cValidatorChangeProfile": {
+    "action": {
+      "type": "CValidatorAction",
+      "changeProfile": {
+        "node_ip": {
+          "Ip": "2001:db8::10"
+        },
+        "name": "hyper-axis-validator-v2",
+        "description": null,
+        "unjailed": true,
+        "disable_delegations": true,
+        "commission_bps": 450,
+        "signer": "0x000000000000000000000000000000000000cafe"
+      }
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065b04356616c696461746f72416374696f6ead6368616e676550726f66696c6587a76e6f64655f697081a24970ac323030313a6462383a3a3130a46e616d65b768797065722d617869732d76616c696461746f722d7632ab6465736372697074696f6ec0a8756e6a61696c6564c3b364697361626c655f64656c65676174696f6e73c3ae636f6d6d697373696f6e5f627073cd01c2a67369676e6572d92a307830303030303030303030303030303030303030303030303030303030303030303030303063616665",
+    "actionHashHex": "d1eebea48ccbdd91c67c3d5f29ddd603f3005476dad8c0bb7ed257e9cc7a0255",
+    "signingDigestHex": "6f05ed96a257facda5d8e54effcd6a1f564c85ac51a385b45c558fb16ddf3915",
+    "signature": {
+      "r": "0x2cc889896b64d8d8c08e288082d880a2cbe78de7e75a26c41acb46de770e7ff0",
+      "s": "0x7738ee877649aa35e087c6257f21b37e809fe5e4989d569d98301e11b3472956",
+      "v": 27
+    }
+  },
+  "cValidatorUnregister": {
+    "action": {
+      "type": "CValidatorAction",
+      "unregister": null
+    },
+    "vaultAddress": null,
+    "expiresAfter": null,
+    "messagePackHex": "82a474797065b04356616c696461746f72416374696f6eaa756e7265676973746572c0",
+    "actionHashHex": "1ca07dbb5e0000982501f11e26f0e3508d72fbf521f2ac72ce95cf4489590cea",
+    "signingDigestHex": "a09927a2b1a12cffaaeb1f84af5e105f09a80e4850e30de0d99e075327d12ab4",
+    "signature": {
+      "r": "0x7522946aca885148132b64c04affe603a61f68cc6d1e4ae713d6b0042d16bac7",
+      "s": "0x4a5eb37e8401969c965361345c6a41c5c1e377aa35b5f4c7d72f897682ba1ce4",
+      "v": 28
+    }
+  },
+  "gossipPriorityBid": {
+    "action": {
+      "type": "gossipPriorityBid",
+      "slotId": 7,
+      "ip": "198.51.100.42",
+      "maxGas": 900000
+    },
+    "vaultAddress": "0x000000000000000000000000000000000000cafe",
+    "expiresAfter": "1234567950000",
+    "messagePackHex": "84a474797065b1676f737369705072696f72697479426964a6736c6f74496407a26970ad3139382e35312e3130302e3432a66d6178476173ce000dbba0",
+    "actionHashHex": "66a951d2a90a0e291bfed8d3d24de637848303e967762a916769b5957ade8feb",
+    "signingDigestHex": "810cdf88fc8e14e17297597d124446d7bed1bff22ef973bab4754ca70998e486",
+    "signature": {
+      "r": "0x6e067eb6976a87c9dbfae1744425f4273dffa28f7c3ea2da2d41989ee5e475c9",
+      "s": "0x53f52cfa861dd4ed256428961609b62feab5b11d7ca81b25998a8e0a005169c7",
+      "v": 28
+    }
+  }
+}

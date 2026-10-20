@@ -1,0 +1,64 @@
+{
+  "description": "Order action encoded with Python msgpack.packb and Crypto.Hash.keccak",
+  "action": {
+    "type": "order",
+    "orders": [
+      {
+        "a": 3,
+        "b": true,
+        "p": "100",
+        "s": "0.5",
+        "r": false,
+        "t": {
+          "limit": {
+            "tif": "Gtc"
+          }
+        }
+      }
+    ],
+    "grouping": "na"
+  },
+  "nonce": 1234567890000,
+  "vaultAddress": null,
+  "expiresAfter": null,
+  "messagePackHex": "83a474797065a56f72646572a66f72646572739186a16103a162c3a170a3313030a173a3302e35a172c2a17481a56c696d697481a3746966a3477463a867726f7570696e67a26e61",
+  "actionHashHex": "48dc49f678049fbcc913f2499325aaefecaf3a280f90b04236a0e3aeea163ebb",
+  "eip712DomainHashHex": "d79297fcdf2ffcd4ae223d01edaa2ba214ff8f401d7c9300d995d17c82aa4040",
+  "eip712AgentHashHex": "4c5aac0ba436b0525c8e1abaaa1472a8fe890cfb97a7ffd778e98993247c1ae4",
+  "signingDigestHex": "329f08729a8f946791ed6e4046ad7d94fb9be574629f1892b48baa6578abc0bc",
+  "signature": {
+    "r": "0xc466abc93e91e15884da406ef9f37e72e924995f0661a286519e0a9e5c7ff919",
+    "s": "0x7cd5cef5728c82b9edcc45cf243f701b464d4b292f5c5d15605028902a1a3b20",
+    "v": 27
+  },
+  "expectedSigner": "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf",
+  "exchangeEndpoint": "https://api.hyperliquid.xyz/exchange",
+  "exchangeRequest": {
+    "action": {
+      "type": "order",
+      "orders": [
+        {
+          "a": 3,
+          "b": true,
+          "p": "100",
+          "s": "0.5",
+          "r": false,
+          "t": {
+            "limit": {
+              "tif": "Gtc"
+            }
+          }
+        }
+      ],
+      "grouping": "na"
+    },
+    "nonce": 1234567890000,
+    "signature": {
+      "r": "0xc466abc93e91e15884da406ef9f37e72e924995f0661a286519e0a9e5c7ff919",
+      "s": "0x7cd5cef5728c82b9edcc45cf243f701b464d4b292f5c5d15605028902a1a3b20",
+      "v": 27
+    },
+    "vaultAddress": null,
+    "expiresAfter": null
+  }
+}

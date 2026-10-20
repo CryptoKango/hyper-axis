@@ -1,0 +1,53 @@
+[workspace]
+resolver = "3"
+members = [
+  "crates/hyper-axis-actions",
+  "crates/hyper-axis-assets",
+  "crates/hyper-axis-client",
+  "crates/hyper-axis-codec",
+  "crates/hyper-axis-core",
+  "crates/hyper-axis-decimal",
+  "crates/hyper-axis-ffi",
+  "crates/hyper-axis-logging",
+  "crates/hyper-axis-nonce",
+  "crates/hyper-axis-signing",
+  "crates/hyper-axis-transport",
+  "crates/hyper-axis-types",
+  "crates/hyper-axis-wasm",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "MIT"
+
+[workspace.dependencies]
+hex = "0.4.3"
+js-sys = "0.3"
+k256 = { version = "0.14", default-features = false, features = ["ecdsa"] }
+rmp-serde = "1.3.0"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+sha3 = "0.10.8"
+thiserror = "2.0.17"
+wasm-bindgen = "=0.2.129"
+
+hyper-axis-actions = { path = "crates/hyper-axis-actions" }
+hyper-axis-assets = { path = "crates/hyper-axis-assets" }
+hyper-axis-client = { path = "crates/hyper-axis-client" }
+hyper-axis-codec = { path = "crates/hyper-axis-codec" }
+hyper-axis-core = { path = "crates/hyper-axis-core" }
+hyper-axis-decimal = { path = "crates/hyper-axis-decimal" }
+hyper-axis-logging = { path = "crates/hyper-axis-logging" }
+hyper-axis-nonce = { path = "crates/hyper-axis-nonce" }
+hyper-axis-signing = { path = "crates/hyper-axis-signing" }
+hyper-axis-transport = { path = "crates/hyper-axis-transport" }
+hyper-axis-types = { path = "crates/hyper-axis-types" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = "warn"
+pedantic = "warn"

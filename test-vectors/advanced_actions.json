@@ -1,0 +1,71 @@
+{
+  "description": "Trigger, scheduled cancel, and TWAP actions encoded independently with Python msgpack.packb and Crypto.Hash.keccak",
+  "triggerOrder": {
+    "action": {
+      "type": "order",
+      "orders": [
+        {
+          "a": 3,
+          "b": false,
+          "p": "95",
+          "s": "0.5",
+          "r": true,
+          "t": {
+            "trigger": {
+              "isMarket": true,
+              "triggerPx": "96",
+              "tpsl": "sl"
+            }
+          }
+        }
+      ],
+      "grouping": "normalTpsl"
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "83a474797065a56f72646572a66f72646572739186a16103a162c2a170a23935a173a3302e35a172c3a17481a77472696767657283a869734d61726b6574c3a9747269676765725078a23936a47470736ca2736ca867726f7570696e67aa6e6f726d616c5470736c",
+    "actionHashHex": "6f28ece5dcb64a466151e66bb42ec0896d2af971c168753f543a9578d251e346"
+  },
+  "scheduleCancel": {
+    "action": {
+      "type": "scheduleCancel",
+      "time": 1234567900000
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "82a474797065ae7363686564756c6543616e63656ca474696d65cf0000011f71fb2b60",
+    "actionHashHex": "78934be3e2fd2f0061b6021207ac779653151887a006ae5be0c8c3df4816273b"
+  },
+  "scheduleCancelClear": {
+    "action": {
+      "type": "scheduleCancel"
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "81a474797065ae7363686564756c6543616e63656c",
+    "actionHashHex": "303dd9398cea010afa164cd55d724322e14e98f80d7a90cc1a9ebdb841ccb32b"
+  },
+  "twapOrder": {
+    "action": {
+      "type": "twapOrder",
+      "twap": {
+        "a": 3,
+        "b": true,
+        "s": "1.25",
+        "r": false,
+        "m": 5,
+        "t": true
+      }
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "82a474797065a9747761704f72646572a47477617086a16103a162c3a173a4312e3235a172c2a16d05a174c3",
+    "actionHashHex": "372e2ffd9a997b1d4cc3aea44ee1091bcccc83d801211e6f4d711820d79b8fda"
+  },
+  "twapCancel": {
+    "action": {
+      "type": "twapCancel",
+      "a": 3,
+      "t": 77
+    },
+    "nonce": "1234567890000",
+    "messagePackHex": "83a474797065aa7477617043616e63656ca16103a1744d",
+    "actionHashHex": "c0d7474503ed345a7985e249be7faac470e29e5c9d0fcd5838a57e89f7e714c3"
+  }
+}

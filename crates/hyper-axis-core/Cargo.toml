@@ -1,0 +1,21 @@
+[package]
+name = "hyper-axis-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+hyper-axis-actions.workspace = true
+hyper-axis-assets.workspace = true
+hyper-axis-codec.workspace = true
+hyper-axis-client.workspace = true
+hyper-axis-decimal.workspace = true
+hyper-axis-logging.workspace = true
+hyper-axis-nonce.workspace = true
+hyper-axis-signing.workspace = true
+hyper-axis-transport.workspace = true
+hyper-axis-types.workspace = true
+
+[lints]
+workspace = true

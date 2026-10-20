@@ -1,0 +1,22 @@
+[package]
+name = "hyper-axis-client"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+hex.workspace = true
+hyper-axis-actions.workspace = true
+hyper-axis-assets.workspace = true
+hyper-axis-codec.workspace = true
+hyper-axis-decimal.workspace = true
+hyper-axis-logging.workspace = true
+hyper-axis-signing.workspace = true
+hyper-axis-types.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[lints]
+workspace = true
