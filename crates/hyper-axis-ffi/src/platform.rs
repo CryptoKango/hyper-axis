@@ -75,6 +75,41 @@ pub fn prepare_info_query_json(query: InfoQuery) -> Result<String, String> {
     serde_json::to_string(&prepared).map_err(|error| error.to_string())
 }
 
+/// Validates and canonicalizes a `perpDexs` response for Dart.
+///
+/// # Errors
+///
+/// Returns an error when the response does not match the protocol schema.
+#[allow(clippy::needless_pass_by_value)]
+pub fn parse_perp_dexs_response_json(body: String) -> Result<String, String> {
+    let response = parse_perp_dexs_response(&body).map_err(|error| error.to_string())?;
+    serde_json::to_string(&response).map_err(|error| error.to_string())
+}
+
+/// Validates and canonicalizes a native or HIP-3 `meta` response for Dart.
+///
+/// # Errors
+///
+/// Returns an error when the response does not match the protocol schema.
+#[allow(clippy::needless_pass_by_value)]
+pub fn parse_perp_meta_response_json(body: String) -> Result<String, String> {
+    let response = parse_perp_meta_response(&body).map_err(|error| error.to_string())?;
+    serde_json::to_string(&response).map_err(|error| error.to_string())
+}
+
+/// Validates and canonicalizes a native or HIP-3 `metaAndAssetCtxs` response for Dart.
+///
+/// # Errors
+///
+/// Returns an error when the response is malformed or its market and context
+/// counts differ.
+#[allow(clippy::needless_pass_by_value)]
+pub fn parse_perp_meta_and_asset_ctxs_response_json(body: String) -> Result<String, String> {
+    let response =
+        parse_perp_meta_and_asset_ctxs_response(&body).map_err(|error| error.to_string())?;
+    serde_json::to_string(&response).map_err(|error| error.to_string())
+}
+
 /// Builds a runtime-neutral `POST /info` request from a typed query.
 ///
 /// # Errors

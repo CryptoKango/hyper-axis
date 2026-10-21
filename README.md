@@ -36,6 +36,24 @@ FFI 集成，网页端可以通过 WebAssembly 集成，从而让多个客户端
 - 面向 Flutter/Dart 的 FFI 接口层；
 - 面向浏览器和 TypeScript 的 WebAssembly 接口层。
 
+## HIP-3 / RWA 市场数据
+
+HyperAxis 支持读取承载股票、商品、指数和外汇等链外标的价格敞口的 HIP-3
+永续市场。Hyperliquid 没有权威的 `RWA` 分类字段，因此 Core 不根据代币名称猜测
+资产类别；宿主应把 HIP-3 市场与自身可信的分类目录进行关联。
+
+推荐的数据链路如下：
+
+1. 使用 `perpDexs` 获取所有 builder-deployed DEX，并保留响应数组中的原始索引；
+2. 使用 `meta { dex }` 或 `metaAndAssetCtxs { dex }` 获取指定 DEX 的市场和实时上下文；
+3. 使用 `allMids { dex }`、`allDexsAssetCtxs`、`candle`、`trades` 和 `l2Book`
+   获取实时或历史行情；
+4. 使用 `hyper_axis_assets::hip3(perp_dex_index, index_in_meta)` 计算下单 Asset ID。
+
+`perpDexs`、`meta` 和 `metaAndAssetCtxs` 提供强类型响应解析器。所有价格、资金费率、
+持仓量和成交量继续保留为十进制字符串，禁止宿主在业务计算前转为浮点数。HIP-3
+股票或商品市场是预言机结算的永续合约，不代表用户持有或可赎回对应的现实资产。
+
 ## 安全边界
 
 HyperAxis 不保存、读取或托管用户私钥。Rust Core 只负责生成经过协议校验的
@@ -382,10 +400,10 @@ scripts/build-wasm.sh
 ```
 
 Linux 产物包含动态库和静态库；Android 产物按 `arm64-v8a`、`armeabi-v7a`、`x86_64`
-拆分；Apple 产物分别提供 device 与通用 simulator 静态库；WASM 产物包含 ES module、
-`.wasm` 和 TypeScript 声明。CI 对每个提交执行格式、测试、原生/wasm32 严格 Clippy 和
-四端制品构建。推送 `v*` tag 后，Release workflow 会复用相同验证流程，生成确定性压缩包
-与 `SHA256SUMS` 后发布。
+拆分，最低 API 为 24；Apple 产物按 device/simulator 和 arm64/x64 拆分，同时提供动态库、
+静态库与 simulator 通用静态库。WASM 产物包含 ES module、`.wasm` 和 TypeScript 声明。
+CI 对每个提交执行格式、测试、原生/wasm32 严格 Clippy 和四端制品构建。推送 `v*` tag 后，
+Release workflow 会复用相同验证流程，生成确定性压缩包与 `SHA256SUMS` 后发布。
 
 ## 当前阶段
 

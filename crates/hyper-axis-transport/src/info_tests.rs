@@ -1,6 +1,9 @@
 use serde_json::{Value, json};
 
-use super::{InfoQuery, OrderStatusSelector, prepare_info_query};
+use super::{
+    InfoQuery, OrderStatusSelector, parse_perp_dexs_response,
+    parse_perp_meta_and_asset_ctxs_response, parse_perp_meta_response, prepare_info_query,
+};
 use crate::CandleInterval;
 
 const USER: &str = "0x000000000000000000000000000000000000beef";
@@ -94,6 +97,60 @@ fn rejects_invalid_ranges_addresses_and_l2_aggregation() {
 }
 
 #[test]
+fn scopes_meta_and_asset_contexts_without_breaking_default_wire_shape() {
+    let default_query = serde_json::from_value::<InfoQuery>(json!({
+        "type": "metaAndAssetCtxs"
+    }))
+    .unwrap();
+    assert_eq!(
+        serde_json::from_str::<Value>(&prepare_info_query(default_query).unwrap().body).unwrap(),
+        json!({"type": "metaAndAssetCtxs"})
+    );
+
+    let hip3_query = serde_json::from_value::<InfoQuery>(json!({
+        "type": "metaAndAssetCtxs",
+        "dex": "xyz"
+    }))
+    .unwrap();
+    assert_eq!(
+        serde_json::from_str::<Value>(&prepare_info_query(hip3_query).unwrap().body).unwrap(),
+        json!({"type": "metaAndAssetCtxs", "dex": "xyz"})
+    );
+
+    assert!(
+        prepare_info_query(InfoQuery::MetaAndAssetCtxs {
+            dex: Some("  ".to_owned()),
+        })
+        .is_err()
+    );
+}
+
+#[test]
+fn parses_typed_hip3_market_responses() {
+    let dexes = parse_perp_dexs_response(
+        r#"[null,{"name":"xyz","fullName":"XYZ","deployer":"0x01","oracleUpdater":null,"feeRecipient":"0x02","assetToStreamingOiCap":[["xyz:TSLA","200000000.0"]],"subDeployers":[],"assetToFundingMultiplier":[["xyz:TSLA","0.5"]],"assetToFundingInterestRate":[],"assetToFundingClamp":[]}]"#,
+    )
+    .unwrap();
+    assert!(dexes[0].is_none());
+    assert_eq!(dexes[1].as_ref().unwrap().name, "xyz");
+
+    let meta_json = r#"{"universe":[{"name":"xyz:TSLA","szDecimals":3,"maxLeverage":20,"marginTableId":20,"growthMode":"enabled","deployerFeeScale":"1.0"}],"collateralToken":0,"marginTables":[[20,{"description":"","marginTiers":[{"lowerBound":"0.0","maxLeverage":20}]}]]}"#;
+    let meta = parse_perp_meta_response(meta_json).unwrap();
+    assert_eq!(meta.universe[0].hip3_parts(), Some(("xyz", "TSLA")));
+
+    let response = parse_perp_meta_and_asset_ctxs_response(&format!(
+        r#"[{meta_json},[{{"funding":"0.0001","openInterest":"10.5","prevDayPx":"300.0","dayNtlVlm":"1000.0","oraclePx":"301.0","markPx":"301.1","midPx":"301.2","impactPxs":["301.0","301.3"]}}]]"#
+    ))
+    .unwrap();
+    let (market, context) = response.markets().next().unwrap();
+    assert_eq!(market.name, "xyz:TSLA");
+    assert_eq!(context.mark_px, "301.1");
+
+    let mismatched = format!(r"[{meta_json},[]]");
+    assert!(parse_perp_meta_and_asset_ctxs_response(&mismatched).is_err());
+}
+
+#[test]
 #[allow(clippy::too_many_lines)]
 fn prepares_every_official_info_wire_type() {
     let user = || USER.to_owned();
@@ -120,7 +177,7 @@ fn prepares_every_official_info_wire_type() {
             aggregate_by_time: false,
         },
         InfoQuery::Meta { dex: String::new() },
-        InfoQuery::MetaAndAssetCtxs,
+        InfoQuery::MetaAndAssetCtxs { dex: None },
         InfoQuery::PerpDexs,
         InfoQuery::SpotMeta,
         InfoQuery::SpotMetaAndAssetCtxs,

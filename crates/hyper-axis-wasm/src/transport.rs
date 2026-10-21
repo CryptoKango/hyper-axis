@@ -37,6 +37,46 @@ pub fn prepare_info_query_json(query_json: &str) -> Result<String, JsError> {
     serde_json::to_string(&prepared).map_err(|error| JsError::new(&error.to_string()))
 }
 
+/// Validates and canonicalizes a `perpDexs` response.
+///
+/// Null array entries are preserved because their indexes are part of HIP-3
+/// asset ID calculation.
+///
+/// # Errors
+///
+/// Returns a JavaScript error when the response does not match the protocol schema.
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+pub fn parse_perp_dexs_response_json(body: &str) -> Result<String, JsError> {
+    let response =
+        parse_perp_dexs_response(body).map_err(|error| JsError::new(&error.to_string()))?;
+    serde_json::to_string(&response).map_err(|error| JsError::new(&error.to_string()))
+}
+
+/// Validates and canonicalizes a native or HIP-3 `meta` response.
+///
+/// # Errors
+///
+/// Returns a JavaScript error when the response does not match the protocol schema.
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+pub fn parse_perp_meta_response_json(body: &str) -> Result<String, JsError> {
+    let response =
+        parse_perp_meta_response(body).map_err(|error| JsError::new(&error.to_string()))?;
+    serde_json::to_string(&response).map_err(|error| JsError::new(&error.to_string()))
+}
+
+/// Validates and canonicalizes a native or HIP-3 `metaAndAssetCtxs` response.
+///
+/// # Errors
+///
+/// Returns a JavaScript error when the response is malformed or its market and
+/// context counts differ.
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+pub fn parse_perp_meta_and_asset_ctxs_response_json(body: &str) -> Result<String, JsError> {
+    let response = parse_perp_meta_and_asset_ctxs_response(body)
+        .map_err(|error| JsError::new(&error.to_string()))?;
+    serde_json::to_string(&response).map_err(|error| JsError::new(&error.to_string()))
+}
+
 /// Builds a runtime-neutral `POST /info` request from a typed query.
 ///
 /// # Errors

@@ -9,6 +9,14 @@ command -v cargo-ndk >/dev/null 2>&1 || {
   exit 1
 }
 
+readonly rust_targets=(
+  aarch64-linux-android
+  armv7-linux-androideabi
+  x86_64-linux-android
+)
+
+rustup target add "${rust_targets[@]}"
+
 mkdir -p "$output_dir"
 cd "$repo_dir"
 cargo ndk \

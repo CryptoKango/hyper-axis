@@ -55,8 +55,12 @@ use hyper_axis_core::{
     signing::WireSignature,
     transport::{
         HostFailureKind, HttpResponse, PostRequestId, RequestKind, Subscription, WsCommand,
-        classify_host_failure, exchange_http_request, info::prepare_info_query, info_http_request,
-        parse_http_response, parse_ws_message, typed_info_http_request,
+        classify_host_failure, exchange_http_request,
+        info::{
+            parse_perp_dexs_response, parse_perp_meta_and_asset_ctxs_response,
+            parse_perp_meta_response, prepare_info_query,
+        },
+        info_http_request, parse_http_response, parse_ws_message, typed_info_http_request,
     },
     types::{EvmAddress, Network},
 };

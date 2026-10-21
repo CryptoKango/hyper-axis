@@ -1,5 +1,13 @@
 //! Strongly typed request models for the read-only Hyperliquid Info API.
 
+mod models;
+
+pub use models::{
+    MarginTable, MarginTier, PerpAssetContext, PerpDex, PerpMarketMeta, PerpMeta,
+    PerpMetaAndAssetCtxs, parse_perp_dexs_response, parse_perp_meta_and_asset_ctxs_response,
+    parse_perp_meta_response,
+};
+
 use hyper_axis_types::{ClientOrderId, EvmAddress};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -62,8 +70,12 @@ pub enum InfoQuery {
     },
     /// Perpetual metadata for one DEX.
     Meta { dex: String },
-    /// Perpetual metadata and live asset contexts.
-    MetaAndAssetCtxs,
+    /// Perpetual metadata and live asset contexts, optionally scoped to a HIP-3 DEX.
+    MetaAndAssetCtxs {
+        /// HIP-3 DEX name. Omit for the native perpetual DEX.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        dex: Option<String>,
+    },
     /// Registered perpetual DEXs.
     PerpDexs,
     /// Spot metadata.
@@ -219,8 +231,15 @@ pub fn prepare_info_query(query: InfoQuery) -> Result<PreparedInfoQuery, Transpo
                 "aggregateByTime": aggregate_by_time,
             })
         }
-        InfoQuery::MetaAndAssetCtxs
-        | InfoQuery::PerpDexs
+        InfoQuery::MetaAndAssetCtxs { dex } => {
+            if let Some(dex) = dex {
+                validate_non_blank("dex", &dex)?;
+                json!({"type": query_type, "dex": dex})
+            } else {
+                json!({"type": query_type})
+            }
+        }
+        InfoQuery::PerpDexs
         | InfoQuery::SpotMeta
         | InfoQuery::SpotMetaAndAssetCtxs
         | InfoQuery::PerpDeployAuctionStatus => json!({"type": query_type}),
@@ -302,7 +321,7 @@ impl InfoQuery {
             Self::UserFills { .. } => "userFills",
             Self::UserFillsByTime { .. } => "userFillsByTime",
             Self::Meta { .. } => "meta",
-            Self::MetaAndAssetCtxs => "metaAndAssetCtxs",
+            Self::MetaAndAssetCtxs { .. } => "metaAndAssetCtxs",
             Self::PerpDexs => "perpDexs",
             Self::SpotMeta => "spotMeta",
             Self::SpotMetaAndAssetCtxs => "spotMetaAndAssetCtxs",

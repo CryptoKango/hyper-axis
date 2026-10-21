@@ -16,6 +16,9 @@ pub enum TransportError {
     /// A typed Info request violates an address, range, or field invariant.
     #[error("invalid Info query: {0}")]
     InvalidInfoQuery(String),
+    /// A typed Info response violates the documented response shape.
+    #[error("invalid Info response: {0}")]
+    InvalidInfoResponse(String),
     /// A required string was empty or whitespace-only.
     #[error("{0} must not be blank")]
     BlankField(&'static str),
