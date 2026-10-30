@@ -1,4 +1,4 @@
-//! Strongly typed HIP-3/perpetual Info API response models.
+//! Strongly typed account, HIP-3, and perpetual Info API response models.
 
 use std::collections::BTreeMap;
 
@@ -180,6 +180,152 @@ pub struct PerpMetaAndAssetCtxs {
     pub asset_contexts: Vec<PerpAssetContext>,
 }
 
+/// Account-level margin totals returned by `clearinghouseState`.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PerpMarginSummary {
+    /// Account equity including unrealized `PnL`.
+    pub account_value: String,
+    /// Initial margin currently reserved by open positions.
+    pub total_margin_used: String,
+    /// Aggregate absolute notional of open positions.
+    pub total_ntl_pos: String,
+    /// Raw USD balance before unrealized `PnL`.
+    pub total_raw_usd: String,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
+/// Funding totals attached to one perpetual position.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PerpCumulativeFunding {
+    /// Funding accumulated over the lifetime of the account.
+    pub all_time: String,
+    /// Funding accumulated since the last position-size change.
+    pub since_change: String,
+    /// Funding accumulated since the position was opened.
+    pub since_open: String,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
+/// Cross or isolated leverage configuration for one position.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PerpLeverage {
+    /// Margin mode, currently `cross` or `isolated`.
+    #[serde(rename = "type")]
+    pub margin_type: String,
+    /// User-selected leverage.
+    pub value: u32,
+    /// Isolated raw USD allocation when supplied by the protocol.
+    #[serde(default)]
+    pub raw_usd: Option<String>,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
+/// One perpetual position returned inside `clearinghouseState`.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PerpPosition {
+    /// Canonical market name, including a HIP-3 DEX prefix when applicable.
+    pub coin: String,
+    /// Cumulative funding totals.
+    pub cum_funding: PerpCumulativeFunding,
+    /// Average entry price. The protocol may return `null` for an empty position.
+    pub entry_px: Option<String>,
+    /// Cross or isolated leverage configuration.
+    pub leverage: PerpLeverage,
+    /// Estimated liquidation price, when one can be computed.
+    pub liquidation_px: Option<String>,
+    /// Initial margin currently used by this position.
+    pub margin_used: String,
+    /// Market maximum leverage.
+    pub max_leverage: u32,
+    /// Current signed-position notional represented as an absolute decimal string.
+    pub position_value: String,
+    /// Position return on equity.
+    pub return_on_equity: String,
+    /// Signed position size: positive is long and negative is short.
+    pub szi: String,
+    /// Current unrealized profit and loss.
+    pub unrealized_pnl: String,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
+/// Position envelope returned by the clearinghouse.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PerpAssetPosition {
+    /// Position details.
+    pub position: PerpPosition,
+    /// Position representation, currently `oneWay`.
+    #[serde(rename = "type")]
+    pub position_type: String,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
+/// Strongly typed perpetual account response from `clearinghouseState`.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PerpClearinghouseState {
+    /// Open perpetual positions.
+    pub asset_positions: Vec<PerpAssetPosition>,
+    /// Cross-position maintenance margin currently in use.
+    pub cross_maintenance_margin_used: String,
+    /// Totals scoped to cross-margin positions.
+    pub cross_margin_summary: PerpMarginSummary,
+    /// Totals including isolated positions.
+    pub margin_summary: PerpMarginSummary,
+    /// Server timestamp. Kept as an exact decimal string across language boundaries.
+    #[serde(deserialize_with = "deserialize_u64_as_string")]
+    pub time: String,
+    /// Maximum amount currently withdrawable from the perpetual account.
+    pub withdrawable: String,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
+/// One token balance returned by `spotClearinghouseState`.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SpotBalance {
+    /// Display ticker used by `HyperCore`.
+    pub coin: String,
+    /// Token index used by `HyperCore`.
+    pub token: u32,
+    /// Amount reserved by open spot orders.
+    pub hold: String,
+    /// Total token balance including held funds.
+    pub total: String,
+    /// Entry notional maintained by the frontend accounting model.
+    pub entry_ntl: String,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
+/// Strongly typed spot account response from `spotClearinghouseState`.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SpotClearinghouseState {
+    /// Token balances held by the account.
+    pub balances: Vec<SpotBalance>,
+    /// Forward-compatible fields added by Hyperliquid.
+    #[serde(flatten)]
+    pub extra: BTreeMap<String, Value>,
+}
+
 impl Serialize for PerpMetaAndAssetCtxs {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -246,4 +392,40 @@ pub fn parse_perp_meta_and_asset_ctxs_response(
         )));
     }
     Ok(response)
+}
+
+/// Parses and canonicalizes a perpetual account response.
+///
+/// # Errors
+///
+/// Returns an error when the response does not match the documented schema.
+pub fn parse_perp_clearinghouse_state_response(
+    body: &str,
+) -> Result<PerpClearinghouseState, TransportError> {
+    serde_json::from_str(body).map_err(Into::into)
+}
+
+/// Parses and canonicalizes a spot account response.
+///
+/// # Errors
+///
+/// Returns an error when the response does not match the documented schema.
+pub fn parse_spot_clearinghouse_state_response(
+    body: &str,
+) -> Result<SpotClearinghouseState, TransportError> {
+    serde_json::from_str(body).map_err(Into::into)
+}
+
+fn deserialize_u64_as_string<'de, D>(deserializer: D) -> Result<String, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let value = Value::deserialize(deserializer)?;
+    match value {
+        Value::Number(number) if number.as_u64().is_some() => Ok(number.to_string()),
+        Value::String(value) if value.parse::<u64>().is_ok() => Ok(value),
+        _ => Err(serde::de::Error::custom(
+            "expected an unsigned integer timestamp",
+        )),
+    }
 }

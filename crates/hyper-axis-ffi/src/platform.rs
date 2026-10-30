@@ -110,6 +110,30 @@ pub fn parse_perp_meta_and_asset_ctxs_response_json(body: String) -> Result<Stri
     serde_json::to_string(&response).map_err(|error| error.to_string())
 }
 
+/// Validates and canonicalizes a perpetual account response for Dart.
+///
+/// # Errors
+///
+/// Returns an error when the response does not match the protocol schema.
+#[allow(clippy::needless_pass_by_value)]
+pub fn parse_perp_clearinghouse_state_response_json(body: String) -> Result<String, String> {
+    let response =
+        parse_perp_clearinghouse_state_response(&body).map_err(|error| error.to_string())?;
+    serde_json::to_string(&response).map_err(|error| error.to_string())
+}
+
+/// Validates and canonicalizes a spot account response for Dart.
+///
+/// # Errors
+///
+/// Returns an error when the response does not match the protocol schema.
+#[allow(clippy::needless_pass_by_value)]
+pub fn parse_spot_clearinghouse_state_response_json(body: String) -> Result<String, String> {
+    let response =
+        parse_spot_clearinghouse_state_response(&body).map_err(|error| error.to_string())?;
+    serde_json::to_string(&response).map_err(|error| error.to_string())
+}
+
 /// Builds a runtime-neutral `POST /info` request from a typed query.
 ///
 /// # Errors

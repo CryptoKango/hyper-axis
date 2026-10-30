@@ -77,6 +77,30 @@ pub fn parse_perp_meta_and_asset_ctxs_response_json(body: &str) -> Result<String
     serde_json::to_string(&response).map_err(|error| JsError::new(&error.to_string()))
 }
 
+/// Validates and canonicalizes a perpetual `clearinghouseState` response.
+///
+/// # Errors
+///
+/// Returns a JavaScript error when the response does not match the protocol schema.
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+pub fn parse_perp_clearinghouse_state_response_json(body: &str) -> Result<String, JsError> {
+    let response = parse_perp_clearinghouse_state_response(body)
+        .map_err(|error| JsError::new(&error.to_string()))?;
+    serde_json::to_string(&response).map_err(|error| JsError::new(&error.to_string()))
+}
+
+/// Validates and canonicalizes a spot `spotClearinghouseState` response.
+///
+/// # Errors
+///
+/// Returns a JavaScript error when the response does not match the protocol schema.
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+pub fn parse_spot_clearinghouse_state_response_json(body: &str) -> Result<String, JsError> {
+    let response = parse_spot_clearinghouse_state_response(body)
+        .map_err(|error| JsError::new(&error.to_string()))?;
+    serde_json::to_string(&response).map_err(|error| JsError::new(&error.to_string()))
+}
+
 /// Builds a runtime-neutral `POST /info` request from a typed query.
 ///
 /// # Errors

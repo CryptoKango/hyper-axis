@@ -3,9 +3,12 @@
 mod models;
 
 pub use models::{
-    MarginTable, MarginTier, PerpAssetContext, PerpDex, PerpMarketMeta, PerpMeta,
-    PerpMetaAndAssetCtxs, parse_perp_dexs_response, parse_perp_meta_and_asset_ctxs_response,
-    parse_perp_meta_response,
+    MarginTable, MarginTier, PerpAssetContext, PerpAssetPosition, PerpClearinghouseState,
+    PerpCumulativeFunding, PerpDex, PerpLeverage, PerpMarginSummary, PerpMarketMeta, PerpMeta,
+    PerpMetaAndAssetCtxs, PerpPosition, SpotBalance, SpotClearinghouseState,
+    parse_perp_clearinghouse_state_response, parse_perp_dexs_response,
+    parse_perp_meta_and_asset_ctxs_response, parse_perp_meta_response,
+    parse_spot_clearinghouse_state_response,
 };
 
 use hyper_axis_types::{ClientOrderId, EvmAddress};

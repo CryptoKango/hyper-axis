@@ -1,8 +1,9 @@
 use serde_json::{Value, json};
 
 use super::{
-    InfoQuery, OrderStatusSelector, parse_perp_dexs_response,
-    parse_perp_meta_and_asset_ctxs_response, parse_perp_meta_response, prepare_info_query,
+    InfoQuery, OrderStatusSelector, parse_perp_clearinghouse_state_response,
+    parse_perp_dexs_response, parse_perp_meta_and_asset_ctxs_response, parse_perp_meta_response,
+    parse_spot_clearinghouse_state_response, prepare_info_query,
 };
 use crate::CandleInterval;
 
@@ -148,6 +149,31 @@ fn parses_typed_hip3_market_responses() {
 
     let mismatched = format!(r"[{meta_json},[]]");
     assert!(parse_perp_meta_and_asset_ctxs_response(&mismatched).is_err());
+}
+
+#[test]
+fn parses_typed_perpetual_and_spot_account_responses() {
+    let perpetual = parse_perp_clearinghouse_state_response(
+        r#"{
+            "assetPositions":[{"position":{"coin":"ETH","cumFunding":{"allTime":"1.2","sinceChange":"0.2","sinceOpen":"0.1"},"entryPx":"2986.3","leverage":{"type":"isolated","value":20,"rawUsd":"-95.059824"},"liquidationPx":"2866.26936529","marginUsed":"4.967826","maxLeverage":50,"positionValue":"100.02765","returnOnEquity":"-0.0026789","szi":"0.0335","unrealizedPnl":"-0.0134"},"type":"oneWay"}],
+            "crossMaintenanceMarginUsed":"0.0",
+            "crossMarginSummary":{"accountValue":"13104.514502","totalMarginUsed":"0.0","totalNtlPos":"0.0","totalRawUsd":"13104.514502"},
+            "marginSummary":{"accountValue":"13109.482328","totalMarginUsed":"4.967826","totalNtlPos":"100.02765","totalRawUsd":"13109.495728"},
+            "time":1681222254710,
+            "withdrawable":"13104.514502"
+        }"#,
+    )
+    .unwrap();
+    assert_eq!(perpetual.time, "1681222254710");
+    assert_eq!(perpetual.asset_positions[0].position.coin, "ETH");
+    assert_eq!(perpetual.asset_positions[0].position.leverage.value, 20);
+
+    let spot = parse_spot_clearinghouse_state_response(
+        r#"{"balances":[{"coin":"USDC","token":0,"hold":"1.0","total":"14.625485","entryNtl":"0.0"}]}"#,
+    )
+    .unwrap();
+    assert_eq!(spot.balances[0].coin, "USDC");
+    assert_eq!(spot.balances[0].token, 0);
 }
 
 #[test]

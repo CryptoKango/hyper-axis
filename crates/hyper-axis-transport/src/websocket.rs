@@ -220,10 +220,11 @@ impl Subscription {
     /// Returns an error for blank symbols/DEX names or unsupported L2
     /// aggregation combinations.
     pub fn validate(&self) -> Result<(), TransportError> {
+        // `ClearinghouseState` intentionally accepts an empty DEX because it
+        // is Hyperliquid's documented identifier for the first perpetual DEX.
         match self {
             Self::AllMids { dex: Some(dex) }
             | Self::TwapStates { dex, .. }
-            | Self::ClearinghouseState { dex, .. }
             | Self::OpenOrders { dex, .. } => validate_non_blank("dex", dex),
             Self::Candle { coin, .. }
             | Self::Trades { coin }
