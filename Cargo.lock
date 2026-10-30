@@ -569,7 +569,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-actions"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hyper-axis-decimal",
  "hyper-axis-types",
@@ -579,7 +579,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-assets"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hyper-axis-decimal",
  "hyper-axis-types",
@@ -588,7 +588,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-client"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hex",
  "hyper-axis-actions",
@@ -605,7 +605,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-codec"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hex",
  "hyper-axis-actions",
@@ -620,7 +620,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-core"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hyper-axis-actions",
  "hyper-axis-assets",
@@ -636,7 +636,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-decimal"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hyper-axis-types",
  "serde",
@@ -644,7 +644,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-ffi"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "flutter_rust_bridge",
  "hyper-axis-core",
@@ -654,7 +654,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-logging"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "js-sys",
  "serde",
@@ -663,7 +663,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-nonce"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hyper-axis-logging",
  "thiserror",
@@ -671,7 +671,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-signing"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hex",
  "hyper-axis-types",
@@ -683,7 +683,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-transport"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hyper-axis-client",
  "hyper-axis-types",
@@ -694,7 +694,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-types"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hex",
  "serde",
@@ -703,7 +703,7 @@ dependencies = [
 
 [[package]]
 name = "hyper-axis-wasm"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "hyper-axis-core",
  "serde",
