@@ -2,7 +2,10 @@
 
 use flutter_rust_bridge::frb;
 use hyper_axis_core::{
-    client::{FinalizedAction, PrepareUsdClassTransferRequest, PreparedUsdClassTransfer},
+    client::{
+        FinalizedAction, PrepareUsdClassTransferRequest, PrepareWithdrawRequest,
+        PreparedUsdClassTransfer, PreparedWithdraw,
+    },
     transport::info::InfoQuery,
     types::Network,
 };
@@ -137,6 +140,36 @@ pub fn finalize_usd_class_transfer_json(
     let prepared: PreparedUsdClassTransfer = decode(&prepared_json, "prepared USD class transfer")?;
     let finalized = crate::finalize_usd_class_transfer(prepared, r, s, v, expected_signer)?;
     encode(&finalized, "finalized USD class transfer")
+}
+
+/// Prepares a Hyperliquid bridge withdrawal for main-wallet signing.
+///
+/// # Errors
+///
+/// Returns an error for malformed JSON, invalid amounts, addresses, or nonces.
+#[frb(sync)]
+pub fn prepare_withdraw_json(request_json: String) -> Result<String, String> {
+    let request: PrepareWithdrawRequest = decode(&request_json, "withdraw request")?;
+    let prepared = crate::prepare_withdraw(request)?;
+    encode(&prepared, "prepared withdrawal")
+}
+
+/// Verifies and finalizes a prepared Hyperliquid bridge withdrawal.
+///
+/// # Errors
+///
+/// Returns an error for modified artifacts, invalid signatures, or signer mismatch.
+#[frb(sync)]
+pub fn finalize_withdraw_json(
+    prepared_json: String,
+    r: String,
+    s: String,
+    v: u8,
+    expected_signer: String,
+) -> Result<String, String> {
+    let prepared: PreparedWithdraw = decode(&prepared_json, "prepared withdrawal")?;
+    let finalized = crate::finalize_withdraw(prepared, r, s, v, expected_signer)?;
+    encode(&finalized, "finalized withdrawal")
 }
 
 /// Builds a canonical exchange HTTP request from a finalized transfer.

@@ -1,7 +1,9 @@
 //! Order preparation and finalization bridge operations.
 
 use flutter_rust_bridge::frb;
-use hyper_axis_core::client::{PrepareLimitOrderRequest, PreparedOrder};
+use hyper_axis_core::client::{
+    PrepareCancelRequest, PrepareLimitOrderRequest, PreparedCancel, PreparedOrder,
+};
 
 use super::json::{decode, encode};
 
@@ -39,11 +41,42 @@ pub fn finalize_order_json(
     encode(&finalized, "finalized order")
 }
 
+/// Validates a cancellation-by-OID request and returns the opaque prepared artifact.
+///
+/// # Errors
+///
+/// Returns a sanitized protocol or JSON error.
+#[frb(sync)]
+pub fn prepare_cancel_json(request_json: String) -> Result<String, String> {
+    let request: PrepareCancelRequest = decode(&request_json, "cancel request")?;
+    let prepared = crate::prepare_cancel(request)?;
+    encode(&prepared, "prepared cancel")
+}
+
+/// Revalidates a prepared cancellation, verifies its signature, and returns the
+/// exact exchange request artifact.
+///
+/// # Errors
+///
+/// Returns a sanitized JSON, signature, signer, or artifact-integrity error.
+#[frb(sync)]
+pub fn finalize_cancel_json(
+    prepared_json: String,
+    r: String,
+    s: String,
+    v: u8,
+    expected_signer: String,
+) -> Result<String, String> {
+    let prepared: PreparedCancel = decode(&prepared_json, "prepared cancel")?;
+    let finalized = crate::finalize_cancel(prepared, r, s, v, expected_signer)?;
+    encode(&finalized, "finalized cancel")
+}
+
 #[cfg(test)]
 mod tests {
     use serde_json::Value;
 
-    use super::{finalize_order_json, prepare_limit_order_json};
+    use super::{finalize_order_json, prepare_cancel_json, prepare_limit_order_json};
 
     const REQUEST: &str = r#"{
         "network":"mainnet",
@@ -95,5 +128,20 @@ mod tests {
     fn rejects_numeric_nonce_at_the_bridge_boundary() {
         let request = REQUEST.replace("\"1234567890000\"", "1234567890000");
         assert!(prepare_limit_order_json(request).is_err());
+    }
+
+    #[test]
+    fn prepares_a_cancel_with_exact_u64_strings() {
+        let request = r#"{
+            "network":"mainnet",
+            "cancels":[{"asset":3,"oid":"42"}],
+            "nonce":"1234567890000",
+            "vaultAddress":null,
+            "expiresAfter":null
+        }"#;
+        let prepared_json = prepare_cancel_json(request.to_owned()).unwrap();
+        let prepared: Value = serde_json::from_str(&prepared_json).unwrap();
+        assert_eq!(prepared["nonce"], "1234567890000");
+        assert_eq!(prepared["action"]["cancels"][0]["o"], 42);
     }
 }
