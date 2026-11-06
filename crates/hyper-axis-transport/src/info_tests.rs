@@ -127,6 +127,33 @@ fn scopes_meta_and_asset_contexts_without_breaking_default_wire_shape() {
 }
 
 #[test]
+fn builds_active_asset_and_builder_fee_queries() {
+    let active_asset = prepare_info_query(InfoQuery::ActiveAssetData {
+        user: USER.to_owned(),
+        coin: "BTC".to_owned(),
+    })
+    .unwrap();
+    assert_eq!(
+        serde_json::from_str::<Value>(&active_asset.body).unwrap(),
+        json!({"type": "activeAssetData", "user": USER, "coin": "BTC"})
+    );
+
+    let max_builder_fee = prepare_info_query(InfoQuery::MaxBuilderFee {
+        user: USER.to_owned(),
+        builder: "0x000000000000000000000000000000000000cafe".to_owned(),
+    })
+    .unwrap();
+    assert_eq!(
+        serde_json::from_str::<Value>(&max_builder_fee.body).unwrap(),
+        json!({
+            "type": "maxBuilderFee",
+            "user": USER,
+            "builder": "0x000000000000000000000000000000000000cafe"
+        })
+    );
+}
+
+#[test]
 fn parses_typed_hip3_market_responses() {
     let dexes = parse_perp_dexs_response(
         r#"[null,{"name":"xyz","fullName":"XYZ","deployer":"0x01","oracleUpdater":null,"feeRecipient":"0x02","assetToStreamingOiCap":[["xyz:TSLA","200000000.0"]],"subDeployers":[],"assetToFundingMultiplier":[["xyz:TSLA","0.5"]],"assetToFundingInterestRate":[],"assetToFundingClamp":[]}]"#,

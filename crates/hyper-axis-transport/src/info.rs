@@ -118,6 +118,10 @@ pub enum InfoQuery {
     },
     /// User fee schedule and volume.
     UserFees { user: String },
+    /// User-specific trading data for one active perpetual market.
+    ActiveAssetData { user: String, coin: String },
+    /// Maximum Builder Fee currently approved by one user.
+    MaxBuilderFee { user: String, builder: String },
     /// Delegator summary.
     DelegatorSummary { user: String },
     /// Active delegations.
@@ -216,6 +220,15 @@ pub fn prepare_info_query(query: InfoQuery) -> Result<PreparedInfoQuery, Transpo
         | InfoQuery::ExtraAgents { user } => {
             json!({"type": query_type, "user": address(&user)?})
         }
+        InfoQuery::ActiveAssetData { user, coin } => {
+            validate_non_blank("coin", &coin)?;
+            json!({"type": query_type, "user": address(&user)?, "coin": coin})
+        }
+        InfoQuery::MaxBuilderFee { user, builder } => json!({
+            "type": query_type,
+            "user": address(&user)?,
+            "builder": address(&builder)?,
+        }),
         InfoQuery::AllMids { dex } | InfoQuery::Meta { dex } => {
             json!({"type": query_type, "dex": dex})
         }
@@ -333,6 +346,8 @@ impl InfoQuery {
             Self::L2Book { .. } => "l2Book",
             Self::CandleSnapshot { .. } => "candleSnapshot",
             Self::UserFees { .. } => "userFees",
+            Self::ActiveAssetData { .. } => "activeAssetData",
+            Self::MaxBuilderFee { .. } => "maxBuilderFee",
             Self::DelegatorSummary { .. } => "delegatorSummary",
             Self::Delegations { .. } => "delegations",
             Self::DelegatorRewards { .. } => "delegatorRewards",
