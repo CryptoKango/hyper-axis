@@ -21,7 +21,7 @@ pub fn prepare_limit_order(
             client_order_id: request.client_order_id,
         }],
         grouping: request.grouping,
-        builder: None,
+        builder: request.builder,
         nonce: request.nonce,
         vault_address: request.vault_address,
         expires_after: request.expires_after,

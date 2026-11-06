@@ -24,6 +24,8 @@ pub struct PrepareLimitOrderRequest {
     pub client_order_id: Option<String>,
     /// Batch grouping mode.
     pub grouping: Grouping,
+    /// Optional builder fee attribution.
+    pub builder: Option<BuilderInput>,
     /// Millisecond nonce used by the action hash.
     #[serde(with = "u64_string")]
     pub nonce: u64,

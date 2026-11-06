@@ -20,6 +20,8 @@ pub fn prepare_limit_order_json(
     reduce_only: bool,
     time_in_force: &str,
     nonce: &str,
+    builder_address: Option<String>,
+    builder_fee: Option<u32>,
     vault_address: Option<String>,
     expires_after: Option<String>,
 ) -> Result<String, JsError> {
@@ -44,6 +46,11 @@ pub fn prepare_limit_order_json(
     let expires_after = expires_after
         .map(|value| parse_u64("expiresAfter", &value))
         .transpose()?;
+    let builder = match (builder_address, builder_fee) {
+        (Some(address), Some(fee)) => Some(hyper_axis_core::client::BuilderInput { address, fee }),
+        (None, None) => None,
+        _ => return Err(JsError::new("builderAddress and builderFee must be provided together")),
+    };
     let request = PrepareLimitOrderRequest {
         network,
         asset: AssetId::new(asset),
@@ -56,6 +63,7 @@ pub fn prepare_limit_order_json(
         time_in_force,
         client_order_id: None,
         grouping: Grouping::None,
+        builder,
         nonce,
         vault_address,
         expires_after,

@@ -84,6 +84,7 @@
             time_in_force: TimeInForce::Gtc,
             client_order_id: None,
             grouping: Grouping::None,
+            builder: None,
             nonce: 1_234_567_890_000,
             vault_address: None,
             expires_after: None,
@@ -177,6 +178,21 @@
         assert_eq!(json["expiresAfter"], "2000");
         let round_trip: PreparedOrder = serde_json::from_value(json).unwrap();
         assert_eq!(round_trip, prepared);
+    }
+
+    #[test]
+    fn prepares_single_limit_order_with_validated_builder() {
+        let mut request = request();
+        request.builder = Some(BuilderInput {
+            address: "0x0000000000000000000000000000000000000001".to_owned(),
+            fee: 100,
+        });
+
+        let prepared = prepare_limit_order(request).unwrap();
+        let action: Value = serde_json::from_str(&prepared.action_json).unwrap();
+
+        assert_eq!(action["builder"]["b"], "0x0000000000000000000000000000000000000001");
+        assert_eq!(action["builder"]["f"], 100);
     }
 
     #[test]
@@ -1575,6 +1591,7 @@
             time_in_force: TimeInForce::Gtc,
             client_order_id: None,
             grouping: Grouping::None,
+            builder: None,
             nonce,
             vault_address: None,
             expires_after: None,
