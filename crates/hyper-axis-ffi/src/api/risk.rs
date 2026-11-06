@@ -1,7 +1,10 @@
 //! Risk-setting bridge operations.
 
 use flutter_rust_bridge::frb;
-use hyper_axis_core::client::{PrepareUpdateLeverageRequest, PreparedUpdateLeverage};
+use hyper_axis_core::client::{
+    PrepareUpdateIsolatedMarginRequest, PrepareUpdateLeverageRequest, PreparedUpdateIsolatedMargin,
+    PreparedUpdateLeverage,
+};
 
 use super::json::{decode, encode};
 
@@ -35,11 +38,38 @@ pub fn finalize_update_leverage_json(
     encode(&finalized, "finalized leverage update")
 }
 
+/// Validates an exact isolated-margin USD delta and returns its opaque artifact.
+#[frb(sync)]
+pub fn prepare_update_isolated_margin_json(request_json: String) -> Result<String, String> {
+    let request: PrepareUpdateIsolatedMarginRequest =
+        decode(&request_json, "update-isolated-margin request")?;
+    let prepared = crate::prepare_update_isolated_margin(request)?;
+    encode(&prepared, "prepared isolated-margin update")
+}
+
+/// Revalidates and finalizes an isolated-margin update after external signing.
+#[frb(sync)]
+pub fn finalize_update_isolated_margin_json(
+    prepared_json: String,
+    r: String,
+    s: String,
+    v: u8,
+    expected_signer: String,
+) -> Result<String, String> {
+    let prepared: PreparedUpdateIsolatedMargin =
+        decode(&prepared_json, "prepared isolated-margin update")?;
+    let finalized = crate::finalize_update_isolated_margin(prepared, r, s, v, expected_signer)?;
+    encode(&finalized, "finalized isolated-margin update")
+}
+
 #[cfg(test)]
 mod tests {
     use serde_json::Value;
 
-    use super::{finalize_update_leverage_json, prepare_update_leverage_json};
+    use super::{
+        finalize_update_leverage_json, prepare_update_isolated_margin_json,
+        prepare_update_leverage_json,
+    };
 
     const REQUEST: &str = r#"{
         "network":"mainnet",
@@ -89,5 +119,18 @@ mod tests {
             )
             .is_err()
         );
+    }
+
+    #[test]
+    fn prepares_an_exact_isolated_margin_delta() {
+        let request = r#"{
+            "network":"mainnet","asset":4,"isBuy":true,
+            "usdDelta":"12.345678","nonce":"1234567890000",
+            "vaultAddress":null,"expiresAfter":null
+        }"#;
+        let prepared_json = prepare_update_isolated_margin_json(request.to_owned()).unwrap();
+        let prepared: Value = serde_json::from_str(&prepared_json).unwrap();
+        assert_eq!(prepared["action"]["type"], "updateIsolatedMargin");
+        assert_eq!(prepared["action"]["ntli"], 12_345_678);
     }
 }

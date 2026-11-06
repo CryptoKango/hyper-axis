@@ -2,7 +2,8 @@
 
 use flutter_rust_bridge::frb;
 use hyper_axis_core::client::{
-    PrepareCancelRequest, PrepareLimitOrderRequest, PreparedCancel, PreparedOrder,
+    PrepareCancelRequest, PrepareLimitOrderRequest, PrepareOrdersRequest, PreparedCancel,
+    PreparedOrder,
 };
 
 use super::json::{decode, encode};
@@ -20,6 +21,19 @@ pub fn prepare_limit_order_json(request_json: String) -> Result<String, String> 
     let request: PrepareLimitOrderRequest = decode(&request_json, "limit-order request")?;
     let prepared = crate::prepare_limit_order(request)?;
     encode(&prepared, "prepared order")
+}
+
+/// Validates a mixed batch of limit and trigger orders and returns the opaque
+/// prepared artifact.
+///
+/// # Errors
+///
+/// Returns a sanitized protocol or JSON error.
+#[frb(sync)]
+pub fn prepare_orders_json(request_json: String) -> Result<String, String> {
+    let request: PrepareOrdersRequest = decode(&request_json, "orders request")?;
+    let prepared = crate::prepare_orders(request)?;
+    encode(&prepared, "prepared orders")
 }
 
 /// Revalidates a prepared order, verifies its signature, and returns the exact
@@ -76,7 +90,9 @@ pub fn finalize_cancel_json(
 mod tests {
     use serde_json::Value;
 
-    use super::{finalize_order_json, prepare_cancel_json, prepare_limit_order_json};
+    use super::{
+        finalize_order_json, prepare_cancel_json, prepare_limit_order_json, prepare_orders_json,
+    };
 
     const REQUEST: &str = r#"{
         "network":"mainnet",
@@ -143,5 +159,29 @@ mod tests {
         let prepared: Value = serde_json::from_str(&prepared_json).unwrap();
         assert_eq!(prepared["nonce"], "1234567890000");
         assert_eq!(prepared["action"]["cancels"][0]["o"], 42);
+    }
+
+    #[test]
+    fn prepares_a_trigger_order() {
+        let request = r#"{
+            "network":"mainnet",
+            "orders":[{"kind":"trigger","asset":3,"marketKind":"perpetual",
+              "szDecimals":2,"isBuy":false,"limitPrice":"95","size":"0.50",
+              "reduceOnly":true,"triggerPrice":"96","isMarket":true,
+              "triggerKind":"sl","clientOrderId":null}],
+            "grouping":"positionTpsl","nonce":"1234567890000",
+            "vaultAddress":null,"expiresAfter":null
+        }"#;
+        let prepared_json = prepare_orders_json(request.to_owned()).unwrap();
+        let prepared: Value = serde_json::from_str(&prepared_json).unwrap();
+        assert_eq!(prepared["action"]["grouping"], "positionTpsl");
+        assert_eq!(
+            prepared["action"]["orders"][0]["t"]["trigger"]["triggerPx"],
+            "96"
+        );
+        assert_eq!(
+            prepared["action"]["orders"][0]["t"]["trigger"]["tpsl"],
+            "sl"
+        );
     }
 }
