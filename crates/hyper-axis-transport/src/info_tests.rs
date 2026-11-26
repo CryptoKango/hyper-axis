@@ -232,6 +232,7 @@ fn prepares_every_official_info_wire_type() {
         InfoQuery::Meta { dex: String::new() },
         InfoQuery::MetaAndAssetCtxs { dex: None },
         InfoQuery::PerpDexs,
+        InfoQuery::PerpCategories,
         InfoQuery::SpotMeta,
         InfoQuery::SpotMetaAndAssetCtxs,
         InfoQuery::FundingHistory {
@@ -284,7 +285,7 @@ fn prepares_every_official_info_wire_type() {
         InfoQuery::SpotDeployState { user: user() },
         InfoQuery::ExtraAgents { user: user() },
     ];
-    assert_eq!(queries.len(), 37);
+    assert_eq!(queries.len(), 38);
     for query in queries {
         let expected_type = query.query_type();
         let prepared = prepare_info_query(query).unwrap();

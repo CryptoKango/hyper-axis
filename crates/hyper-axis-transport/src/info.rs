@@ -81,6 +81,8 @@ pub enum InfoQuery {
     },
     /// Registered perpetual DEXs.
     PerpDexs,
+    /// Categories keyed by fully qualified perpetual coin.
+    PerpCategories,
     /// Spot metadata.
     SpotMeta,
     /// Spot metadata and live asset contexts.
@@ -256,6 +258,7 @@ pub fn prepare_info_query(query: InfoQuery) -> Result<PreparedInfoQuery, Transpo
             }
         }
         InfoQuery::PerpDexs
+        | InfoQuery::PerpCategories
         | InfoQuery::SpotMeta
         | InfoQuery::SpotMetaAndAssetCtxs
         | InfoQuery::PerpDeployAuctionStatus => json!({"type": query_type}),
@@ -339,6 +342,7 @@ impl InfoQuery {
             Self::Meta { .. } => "meta",
             Self::MetaAndAssetCtxs { .. } => "metaAndAssetCtxs",
             Self::PerpDexs => "perpDexs",
+            Self::PerpCategories => "perpCategories",
             Self::SpotMeta => "spotMeta",
             Self::SpotMetaAndAssetCtxs => "spotMetaAndAssetCtxs",
             Self::FundingHistory { .. } => "fundingHistory",
